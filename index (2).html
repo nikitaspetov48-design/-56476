@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Детейлинг Томск — Премиальный уход за автомобилем</title>
+  <meta name="description" content="Премиальный детейлинг в Томске. Полировка кузова, керамическое покрытие, химчистка салона. Запись онлайн.">
+  <meta name="keywords" content="детейлинг Томск, полировка авто, керамика, химчистка салона, защитное покрытие">
+  <meta property="og:title" content="Детейлинг Томск — Премиальный уход за автомобилем">
+  <meta property="og:description" content="Профессиональный детейлинг премиум-класса в Томске. Полировка, керамика, химчистка.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="theme-color" content="#050505">
+  <meta name="robots" content="index, follow">
+
+  <!-- Favicon (простой SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23050505'/><path d='M20 55h60l-8-18H28z' fill='%23c9a227'/><circle cx='32' cy='62' r='8' fill='%23a1a1aa'/><circle cx='68' cy='62' r='8' fill='%23a1a1aa'/></svg>">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            black: '#050505',
+            graphite: '#111111',
+            'graphite-light': '#1a1a1a',
+            silver: '#a1a1aa',
+            accent: '#c9a227',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    :root {
+      --bg: #050505;
+      --card: #111111;
+      --border: rgba(255,255,255,0.08);
+      --accent: #c9a227;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: #f5f5f5;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #555; }
+
+    .text-accent { color: var(--accent); }
+    .bg-accent { background-color: var(--accent); }
+    .border-accent { border-color: var(--accent); }
+
+    .nav-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(5, 5, 5, 0.82);
+    }
+
+    .hero-overlay {
+      background: linear-gradient(180deg, rgba(5,5,5,0.25) 0%, rgba(5,5,5,0.65) 55%, rgba(5,5,5,1) 100%);
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.35s ease, transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .card:hover {
+      border-color: rgba(201, 162, 39, 0.35);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.6);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #050505;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      background: #dbb42c;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(201, 162, 39, 0.3);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-whatsapp {
+      background: #25D366;
+      transition: all 0.3s ease;
+    }
+    .btn-whatsapp:hover {
+      background: #20bd5a;
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+    }
+
+    /* Before/After */
+    .ba-container {
+      position: relative;
+      overflow: hidden;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+      cursor: ew-resize;
+    }
+    .ba-after {
+      position: absolute;
+      inset: 0;
+      width: 50%;
+      overflow: hidden;
+      will-change: width;
+    }
+    .ba-after img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      max-width: none;
+      object-fit: cover;
+      object-position: left center;
+    }
+    .ba-handle {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: #fff;
+      z-index: 10;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .ba-handle-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111;
+      font-size: 14px;
+      pointer-events: auto;
+      cursor: ew-resize;
+    }
+    @media (max-width: 640px) {
+      .ba-handle-btn { width: 56px; height: 56px; font-size: 16px; }
+    }
+
+    /* Form */
+    .form-input {
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: border-color 0.25s ease;
+    }
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .form-input.error {
+      border-color: #ef4444;
+    }
+
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* Floating WhatsApp */
+    .floating-wa {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 60;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+      transition: transform 0.3s ease;
+    }
+    .floating-wa:hover { transform: scale(1.08); }
+    @media (max-width: 480px) {
+      .floating-wa { bottom: 16px; right: 16px; width: 52px; height: 52px; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+    }
+
+    .service-img-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+    .service-img-wrap img {
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .card:hover .service-img-wrap img {
+      transform: scale(1.05);
+    }
+
+    .section-line {
+      width: 48px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      padding: 20px;
+    }
+    .lightbox.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+    /* Gallery item cursor */
+    .gallery-item { cursor: zoom-in; }
+
+    /* Hide elements when contact empty */
+    .contact-instagram.hidden,
+    .contact-phone.hidden { display: none !important; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- ========== NAV ========== -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <div class="nav-blur border-b border-white/5">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 h-16 md:h-20 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-3 group" aria-label="На главную">
+          <div class="w-9 h-9 rounded-full border border-accent/60 flex items-center justify-center group-hover:bg-accent/10 transition">
+            <i class="fas fa-car-side text-accent text-sm"></i>
+          </div>
+          <div>
+            <div class="font-semibold text-sm tracking-wide leading-none">ДЕТЕЙЛИНГ</div>
+            <div class="text-[10px] text-silver tracking-widest uppercase mt-0.5">Томск</div>
+          </div>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-10 text-sm font-medium text-silver" aria-label="Основное меню">
+          <a href="#services" class="hover:text-white transition">Услуги</a>
+          <a href="#portfolio" class="hover:text-white transition">Работы</a>
+          <a href="#prices" class="hover:text-white transition">Цены</a>
+          <a href="#about" class="hover:text-white transition">О нас</a>
+          <a href="#booking" class="hover:text-white transition">Запись</a>
+        </nav>
+
+        <div class="flex items-center gap-4">
+          <a href="#" class="contact-phone hidden sm:flex items-center gap-2 text-sm font-medium hover:text-accent transition" data-contact="tel">
+            <i class="fas fa-phone text-xs"></i>
+            <span data-contact="phone-display"></span>
+          </a>
+          <a href="#booking" class="btn-primary hidden md:inline-flex px-5 py-2.5 rounded-full text-sm">
+            Записаться
+          </a>
+          <button id="burger" class="lg:hidden w-10 h-10 flex items-center justify-center text-white" aria-label="Открыть меню">
+            <i class="fas fa-bars text-lg"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-50 bg-black/95 flex flex-col pt-24 px-8 lg:hidden" aria-hidden="true">
+    <button id="closeMenu" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-white" aria-label="Закрыть меню">
+      <i class="fas fa-times text-xl"></i>
+    </button>
+    <nav class="flex flex-col gap-6 text-2xl font-medium" aria-label="Мобильное меню">
+      <a href="#services" class="mobile-link">Услуги</a>
+      <a href="#portfolio" class="mobile-link">Работы</a>
+      <a href="#prices" class="mobile-link">Цены</a>
+      <a href="#about" class="mobile-link">О нас</a>
+      <a href="#booking" class="mobile-link">Запись</a>
+    </nav>
+    <div class="mt-auto pb-12 space-y-4">
+      <a href="#" class="contact-phone block text-lg" data-contact="tel">
+        <span data-contact="phone-display"></span>
+      </a>
+      <a href="#" class="js-wa-default btn-whatsapp inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-medium">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+  </div>
+
+  <!-- ========== HERO ========== -->
+  <section class="relative h-screen min-h-[640px] flex items-end pb-20 md:pb-28 overflow-hidden">
+    <div class="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=2000&q=80"
+        alt="Премиальный автомобиль"
+        class="w-full h-full object-cover object-center scale-105"
+        id="heroImg"
+        fetchpriority="high"
+        decoding="async"
+      >
+      <div class="absolute inset-0 hero-overlay"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-5 sm:px-8 w-full">
+      <div class="max-w-3xl">
+        <div id="heroBadge" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 text-xs tracking-widest uppercase text-silver mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          Томск
+        </div>
+        <h1 id="heroTitle" class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight mb-6">
+          Ваш автомобиль<br>
+          <span class="text-accent">в идеальном состоянии</span>
+        </h1>
+        <p id="heroDesc" class="text-lg md:text-xl text-silver max-w-xl mb-10 leading-relaxed">
+          Премиальный детейлинг: полировка, керамика, глубокая химчистка.
+          Результат, который виден и ощущается.
+        </p>
+        <div id="heroCta" class="flex flex-col sm:flex-row gap-4">
+          <a href="#booking" class="btn-primary inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base">
+            Записаться
+            <i class="fas fa-arrow-right text-sm"></i>
+          </a>
+          <a href="#services" class="btn-outline inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full text-base">
+            Смотреть услуги
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-silver text-xs tracking-widest uppercase opacity-50 pointer-events-none">
+      <span>Листайте</span>
+      <div class="w-px h-8 bg-gradient-to-b from-silver to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ========== SERVICES ========== -->
+  <section id="services" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="mb-14 md:mb-18">
+        <div class="section-line mb-6"></div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Услуги</h2>
+        <p class="text-silver text-lg max-w-xl">Полный спектр премиального ухода за автомобилем</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <article class="card rounded-2xl overflow-hidden reveal">
+          <div class="service-img-wrap aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=80" alt="Полировка кузова" class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+          <div class="p-6 md:p-7">
+            <h3 class="text-xl font-semibold mb-3">Полировка кузова</h3>
+            <p class="text-silver text-sm leading-relaxed mb-6">Восстановительная и защитная полировка. Удаление царапин, паутинки, возвращение глубокого блеска ЛКП.</p>
+            <a href="#booking" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">
+              Записаться <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl overflow-hidden reveal">
+          <div class="service-img-wrap aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80" alt="Керамическое покрытие" class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+          <div class="p-6 md:p-7">
+            <h3 class="text-xl font-semibold mb-3">Керамическое покрытие</h3>
+            <p class="text-silver text-sm leading-relaxed mb-6">Долговременная защита кузова. Гидрофобный эффект, устойчивость к химии и UV. Кузов дольше остаётся чистым.</p>
+            <a href="#booking" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">
+              Записаться <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl overflow-hidden reveal">
+          <div class="service-img-wrap aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=800&q=80" alt="Химчистка салона" class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+          <div class="p-6 md:p-7">
+            <h3 class="text-xl font-semibold mb-3">Химчистка салона</h3>
+            <p class="text-silver text-sm leading-relaxed mb-6">Глубокая чистка сидений, потолка, пластика и ковролина. Удаление пятен, запахов и сложных загрязнений.</p>
+            <a href="#booking" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">
+              Записаться <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl overflow-hidden reveal">
+          <div class="service-img-wrap aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80" alt="Антидождь" class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+          <div class="p-6 md:p-7">
+            <h3 class="text-xl font-semibold mb-3">Антидождь</h3>
+            <p class="text-silver text-sm leading-relaxed mb-6">Гидрофобное покрытие на стёкла. Вода и грязь скатываются, улучшается обзор в дождь и ночью.</p>
+            <a href="#booking" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">
+              Записаться <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl overflow-hidden reveal">
+          <div class="service-img-wrap aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=800&q=80" alt="Детейлинг двигателя" class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+          <div class="p-6 md:p-7">
+            <h3 class="text-xl font-semibold mb-3">Детейлинг двигателя</h3>
+            <p class="text-silver text-sm leading-relaxed mb-6">Бережная мойка и консервация моторного отсека. Удаление масла, грязи, обработка пластика и резины.</p>
+            <a href="#booking" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">
+              Записаться <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+
+        <article class="card rounded-2xl overflow-hidden reveal">
+          <div class="service-img-wrap aspect-[4/3]">
+            <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193b?auto=format&fit=crop&w=800&q=80" alt="Полировка фар" class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </div>
+          <div class="p-6 md:p-7">
+            <h3 class="text-xl font-semibold mb-3">Полировка фар</h3>
+            <p class="text-silver text-sm leading-relaxed mb-6">Восстановление прозрачности фар и фонарей. Снятие желтизны и матовости + защитный слой.</p>
+            <a href="#booking" class="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline">
+              Записаться <i class="fas fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PORTFOLIO ========== -->
+  <section id="portfolio" class="py-20 md:py-28 bg-graphite">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="mb-14 md:mb-18">
+        <div class="section-line mb-6"></div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Работы</h2>
+        <p class="text-silver text-lg max-w-xl">Демонстрационные примеры. Замените на ваши реальные фото.</p>
+      </div>
+
+      <!-- Before / After -->
+      <div class="mb-14 reveal">
+        <h3 class="text-xl font-semibold mb-5">До / После</h3>
+        <div class="ba-container rounded-2xl overflow-hidden aspect-[16/10] sm:aspect-[16/9] max-w-4xl" id="baSlider" role="img" aria-label="Сравнение до и после">
+          <img
+            src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80"
+            alt="После"
+            class="w-full h-full object-cover"
+            draggable="false"
+            loading="lazy"
+            decoding="async"
+          >
+          <div class="ba-after" id="baAfter">
+            <img
+              src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1400&q=80"
+              alt="До"
+              draggable="false"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+          <div class="ba-handle" id="baHandle">
+            <div class="ba-handle-btn" aria-hidden="true">
+              <i class="fas fa-arrows-alt-h"></i>
+            </div>
+          </div>
+          <div class="absolute top-3 left-3 px-3 py-1 bg-black/70 text-xs rounded-full z-20 pointer-events-none">До</div>
+          <div class="absolute top-3 right-3 px-3 py-1 bg-black/70 text-xs rounded-full z-20 pointer-events-none">После</div>
+        </div>
+        <p class="text-sm text-silver mt-4">Потяните ползунок. Это демонстрационные изображения — замените на ваши работы.</p>
+      </div>
+
+      <!-- Gallery -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6" id="gallery">
+        <div class="reveal aspect-[4/3] rounded-xl overflow-hidden gallery-item" data-src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=80">
+          <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=700&q=80" alt="Пример работы" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+        </div>
+        <div class="reveal aspect-[4/3] rounded-xl overflow-hidden gallery-item" data-src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1400&q=80">
+          <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=700&q=80" alt="Пример работы" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+        </div>
+        <div class="reveal aspect-[4/3] rounded-xl overflow-hidden gallery-item" data-src="https://images.unsplash.com/photo-1542362567-b07e5437078c?auto=format&fit=crop&w=1400&q=80">
+          <img src="https://images.unsplash.com/photo-1542362567-b07e5437078c?auto=format&fit=crop&w=700&q=80" alt="Пример работы" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+        </div>
+        <div class="reveal aspect-[4/3] rounded-xl overflow-hidden gallery-item" data-src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=1400&q=80">
+          <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&w=700&q=80" alt="Пример работы" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+        </div>
+        <div class="reveal aspect-[4/3] rounded-xl overflow-hidden gallery-item" data-src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1400&q=80">
+          <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=700&q=80" alt="Пример работы" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+        </div>
+        <div class="reveal aspect-[4/3] rounded-xl overflow-hidden gallery-item" data-src="https://images.unsplash.com/photo-1616422285623-13ff0162193b?auto=format&fit=crop&w=1400&q=80">
+          <img src="https://images.unsplash.com/photo-1616422285623-13ff0162193b?auto=format&fit=crop&w=700&q=80" alt="Пример работы" class="w-full h-full object-cover hover:scale-105 transition duration-500" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр изображения">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Закрыть">
+      <i class="fas fa-times text-lg"></i>
+    </button>
+    <img src="" alt="Увеличенное изображение" id="lightboxImg">
+  </div>
+
+  <!-- ========== PRICES ========== -->
+  <section id="prices" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="mb-14 md:mb-18">
+        <div class="section-line mb-6"></div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Цены</h2>
+        <p class="text-silver text-lg max-w-xl">Стоимость зависит от класса автомобиля и состояния. Точный расчёт — после осмотра.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-4 md:gap-5 max-w-4xl">
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal">
+          <div>
+            <div class="font-medium">Комплексная мойка + уборка</div>
+            <div class="text-sm text-silver mt-1">Кузов + салон + коврики</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 3 500 ₽</div>
+        </div>
+
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal">
+          <div>
+            <div class="font-medium">Химчистка салона</div>
+            <div class="text-sm text-silver mt-1">Полная глубокая чистка</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 12 000 ₽</div>
+        </div>
+
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal border-accent/30">
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-medium">Полировка кузова</span>
+              <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/15 text-accent">Популярно</span>
+            </div>
+            <div class="text-sm text-silver mt-1">Восстановительная 2–3 этапа</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 18 000 ₽</div>
+        </div>
+
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal border-accent/30">
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="font-medium">Керамическое покрытие</span>
+              <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-accent/15 text-accent">Популярно</span>
+            </div>
+            <div class="text-sm text-silver mt-1">1–2 слоя + подготовка</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 25 000 ₽</div>
+        </div>
+
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal">
+          <div>
+            <div class="font-medium">Полировка + керамика</div>
+            <div class="text-sm text-silver mt-1">Комплекс</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 35 000 ₽</div>
+        </div>
+
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal">
+          <div>
+            <div class="font-medium">Полировка фар</div>
+            <div class="text-sm text-silver mt-1">Пара + защита</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 2 500 ₽</div>
+        </div>
+
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal">
+          <div>
+            <div class="font-medium">Антидождь (стёкла)</div>
+            <div class="text-sm text-silver mt-1">Передняя полусфера</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 4 000 ₽</div>
+        </div>
+
+        <div class="card rounded-xl p-5 md:p-6 flex items-center justify-between gap-4 reveal">
+          <div>
+            <div class="font-medium">Детейлинг моторного отсека</div>
+            <div class="text-sm text-silver mt-1">Мойка + консервация</div>
+          </div>
+          <div class="text-accent font-semibold whitespace-nowrap">от 4 500 ₽</div>
+        </div>
+      </div>
+
+      <p class="text-sm text-silver mt-8 max-w-4xl">
+        * Цены указаны для легковых автомобилей. Для кроссоверов и внедорожников — индивидуально.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section id="about" class="py-20 md:py-28 bg-graphite">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="mb-14 md:mb-18">
+        <div class="section-line mb-6"></div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">Почему мы</h2>
+        <p class="text-silver text-lg max-w-xl">Преимущества, которые можно дополнить реальными фактами</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+        <div class="reveal">
+          <div class="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center mb-5">
+            <i class="fas fa-gem text-accent"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Качественные материалы</h3>
+          <p class="text-silver text-sm leading-relaxed">Работаем только с проверенными составами и инструментом премиум-класса.</p>
+        </div>
+        <div class="reveal">
+          <div class="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center mb-5">
+            <i class="fas fa-hand-sparkles text-accent"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Аккуратность</h3>
+          <p class="text-silver text-sm leading-relaxed">Бережный подход к каждому автомобилю. Никаких компромиссов в деталях.</p>
+        </div>
+        <div class="reveal">
+          <div class="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center mb-5">
+            <i class="fas fa-clock text-accent"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Сроки</h3>
+          <p class="text-silver text-sm leading-relaxed">Соблюдаем договорённости и заранее сообщаем о готовности автомобиля.</p>
+        </div>
+        <div class="reveal">
+          <div class="w-12 h-12 rounded-xl border border-white/10 flex items-center justify-center mb-5">
+            <i class="fas fa-shield-alt text-accent"></i>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Результат</h3>
+          <p class="text-silver text-sm leading-relaxed">Вы видите результат до оплаты. Гарантия на выполненные работы.</p>
+        </div>
+      </div>
+
+      <!-- Reviews — empty ready block -->
+      <div class="mt-16 md:mt-20 pt-12 md:pt-16 border-t border-white/5">
+        <h3 class="text-xl font-semibold mb-3">Отзывы клиентов</h3>
+        <p class="text-silver text-sm mb-8 max-w-xl">
+          Здесь можно разместить реальные отзывы. Пока блок пуст — добавьте текст и имя клиента, когда появятся первые отзывы.
+        </p>
+        <div class="card rounded-xl p-8 md:p-10 text-center border-dashed border-white/10">
+          <i class="fas fa-comment-dots text-3xl text-silver/40 mb-4"></i>
+          <p class="text-silver text-sm">Отзывы появятся здесь</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== BOOKING ========== -->
+  <section id="booking" class="py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div>
+          <div class="section-line mb-6"></div>
+          <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6">Запись</h2>
+          <p class="text-silver text-lg mb-10 leading-relaxed">
+            Оставьте заявку — мы свяжемся с вами, уточним детали и предложим удобное время.
+          </p>
+
+          <div class="space-y-5">
+            <a href="#" class="contact-phone flex items-center gap-4 group" data-contact="tel">
+              <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-accent/50 transition">
+                <i class="fas fa-phone text-accent"></i>
+              </div>
+              <div>
+                <div class="text-xs text-silver uppercase tracking-wider">Телефон</div>
+                <div class="font-medium text-lg" data-contact="phone-display"></div>
+              </div>
+            </a>
+
+            <a href="#" class="js-wa-default flex items-center gap-4 group">
+              <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-green-500/50 transition">
+                <i class="fab fa-whatsapp text-green-500 text-xl"></i>
+              </div>
+              <div>
+                <div class="text-xs text-silver uppercase tracking-wider">WhatsApp</div>
+                <div class="font-medium text-lg">Написать сообщение</div>
+              </div>
+            </a>
+
+            <a href="#" class="contact-instagram flex items-center gap-4 group" data-contact="instagram" style="display:none;">
+              <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-pink-500/50 transition">
+                <i class="fab fa-instagram text-pink-400 text-xl"></i>
+              </div>
+              <div>
+                <div class="text-xs text-silver uppercase tracking-wider">Instagram</div>
+                <div class="font-medium text-lg" data-contact="instagram-display"></div>
+              </div>
+            </a>
+
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
+                <i class="fas fa-map-marker-alt text-silver"></i>
+              </div>
+              <div>
+                <div class="text-xs text-silver uppercase tracking-wider">Город</div>
+                <div class="font-medium text-lg">Томск, Россия</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="card rounded-2xl p-6 md:p-8">
+          <form id="bookingForm" novalidate>
+            <div class="space-y-5">
+              <div>
+                <label for="name" class="block text-sm font-medium mb-2">Имя <span class="text-red-400">*</span></label>
+                <input type="text" id="name" name="name" required autocomplete="name"
+                  class="form-input w-full px-4 py-3 rounded-xl text-white"
+                  placeholder="Как к вам обращаться">
+                <p class="error-msg text-red-400 text-xs mt-1.5 hidden">Укажите имя</p>
+              </div>
+
+              <div>
+                <label for="phone" class="block text-sm font-medium mb-2">Телефон <span class="text-red-400">*</span></label>
+                <input type="tel" id="phone" name="phone" required autocomplete="tel"
+                  class="form-input w-full px-4 py-3 rounded-xl text-white"
+                  placeholder="+7 (___) ___-__-__"
+                  inputmode="tel">
+                <p class="error-msg text-red-400 text-xs mt-1.5 hidden">Укажите корректный номер телефона</p>
+              </div>
+
+              <div>
+                <label for="car" class="block text-sm font-medium mb-2">Марка и модель авто</label>
+                <input type="text" id="car" name="car" autocomplete="off"
+                  class="form-input w-full px-4 py-3 rounded-xl text-white"
+                  placeholder="Например: Toyota Camry">
+              </div>
+
+              <div>
+                <label for="service" class="block text-sm font-medium mb-2">Интересующая услуга</label>
+                <select id="service" name="service"
+                  class="form-input w-full px-4 py-3 rounded-xl text-white appearance-none">
+                  <option value="">Выберите услугу</option>
+                  <option value="Полировка кузова">Полировка кузова</option>
+                  <option value="Керамическое покрытие">Керамическое покрытие</option>
+                  <option value="Химчистка салона">Химчистка салона</option>
+                  <option value="Антидождь">Антидождь</option>
+                  <option value="Детейлинг двигателя">Детейлинг двигателя</option>
+                  <option value="Полировка фар">Полировка фар</option>
+                  <option value="Комплекс">Комплекс / несколько услуг</option>
+                  <option value="Другое">Другое</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="comment" class="block text-sm font-medium mb-2">Комментарий</label>
+                <textarea id="comment" name="comment" rows="3"
+                  class="form-input w-full px-4 py-3 rounded-xl text-white resize-none"
+                  placeholder="Удобное время, дополнительные пожелания..."></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary w-full py-4 rounded-xl text-base flex items-center justify-center gap-2">
+                <i class="fab fa-whatsapp text-lg"></i>
+                Отправить в WhatsApp
+              </button>
+
+              <p class="text-xs text-silver text-center leading-relaxed">
+                Нажимая кнопку, вы перейдёте в WhatsApp с готовым сообщением.
+                Данные никуда не сохраняются.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="border-t border-white/5 py-10">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full border border-accent/50 flex items-center justify-center">
+          <i class="fas fa-car-side text-accent text-xs"></i>
+        </div>
+        <div>
+          <div class="font-semibold text-sm">ДЕТЕЙЛИНГ</div>
+          <div class="text-[10px] text-silver tracking-widest uppercase">Томск</div>
+        </div>
+      </div>
+      <div class="text-sm text-silver">© 2026 Детейлинг Томск</div>
+      <div class="flex items-center gap-5">
+        <a href="#" class="contact-instagram text-silver hover:text-white transition" data-contact="instagram" style="display:none;" aria-label="Instagram">
+          <i class="fab fa-instagram text-lg"></i>
+        </a>
+        <a href="#" class="js-wa-default text-silver hover:text-green-400 transition" aria-label="WhatsApp">
+          <i class="fab fa-whatsapp text-lg"></i>
+        </a>
+        <a href="#" class="contact-phone text-silver hover:text-accent transition" data-contact="tel" aria-label="Телефон">
+          <i class="fas fa-phone"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="#" class="floating-wa btn-whatsapp text-white text-2xl js-wa-default" aria-label="Написать в WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <script>
+    /**
+     * ============================================
+     *  КОНТАКТЫ — ЗАМЕНИТЕ ТОЛЬКО ЗДЕСЬ
+     * ============================================
+     * phoneDisplay  — как отображается на сайте
+     * phoneTel      — для ссылок tel: (можно с + или без)
+     * whatsapp      — номер для wa.me (только цифры, без + и пробелов)
+     * instagram     — username без @ (оставьте пустым, чтобы скрыть)
+     */
+    const CONTACTS = {
+      phoneDisplay: '',           // например: '+7 900 123-45-67'
+      phoneTel: '',               // например: '+79001234567'
+      whatsapp: '',               // например: '79001234567'
+      instagram: '',              // например: 'username'
+      city: 'Томск'
+    };
+
+    // ========== Apply contacts ==========
+    function applyContacts() {
+      const hasPhone = CONTACTS.phoneDisplay && CONTACTS.phoneTel;
+      const hasWa = CONTACTS.whatsapp;
+      const hasIg = CONTACTS.instagram;
+
+      // Phone displays
+      document.querySelectorAll('[data-contact="phone-display"]').forEach(el => {
+        el.textContent = hasPhone ? CONTACTS.phoneDisplay : 'Укажите телефон';
+      });
+
+      // tel: links
+      document.querySelectorAll('[data-contact="tel"]').forEach(el => {
+        if (hasPhone) {
+          el.href = 'tel:' + CONTACTS.phoneTel.replace(/\s/g, '');
+          el.classList.remove('hidden');
+          el.style.display = '';
+        } else {
+          el.classList.add('hidden');
+          el.removeAttribute('href');
+        }
+      });
+
+      // Instagram
+      document.querySelectorAll('[data-contact="instagram"]').forEach(el => {
+        if (hasIg) {
+          el.href = 'https://instagram.com/' + CONTACTS.instagram;
+          el.style.display = '';
+          const display = el.querySelector('[data-contact="instagram-display"]');
+          if (display) display.textContent = '@' + CONTACTS.instagram;
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
+      // Default WhatsApp links (without form data)
+      const defaultMsg = encodeURIComponent('Здравствуйте! Хочу записаться на детейлинг.');
+      document.querySelectorAll('.js-wa-default').forEach(el => {
+        if (hasWa) {
+          el.href = 'https://wa.me/' + CONTACTS.whatsapp + '?text=' + defaultMsg;
+          el.target = '_blank';
+          el.rel = 'noopener';
+        } else {
+          el.href = '#booking';
+          el.removeAttribute('target');
+        }
+      });
+    }
+
+    // ========== Mobile menu ==========
+    const burger = document.getElementById('burger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenuFn() {
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    burger.addEventListener('click', openMenu);
+    closeMenu.addEventListener('click', closeMenuFn);
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', closeMenuFn);
+    });
+
+    // ========== Header shadow ==========
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('shadow-lg', window.scrollY > 40);
+    }, { passive: true });
+
+    // ========== Before/After slider ==========
+    (function initBA() {
+      const container = document.getElementById('baSlider');
+      const after = document.getElementById('baAfter');
+      const handle = document.getElementById('baHandle');
+      if (!container || !after || !handle) return;
+
+      let isDragging = false;
+
+      function setPosition(clientX) {
+        const rect = container.getBoundingClientRect();
+        let percent = ((clientX - rect.left) / rect.width) * 100;
+        percent = Math.max(4, Math.min(96, percent));
+        after.style.width = percent + '%';
+        handle.style.left = percent + '%';
+      }
+
+      function startDrag(e) {
+        isDragging = true;
+        container.style.cursor = 'ew-resize';
+        if (e.cancelable) e.preventDefault();
+      }
+      function endDrag() {
+        isDragging = false;
+      }
+      function onMove(clientX) {
+        if (!isDragging) return;
+        setPosition(clientX);
+      }
+
+      // Mouse
+      handle.addEventListener('mousedown', startDrag);
+      container.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.ba-handle-btn') || e.target === handle) return;
+        startDrag(e);
+        setPosition(e.clientX);
+      });
+      window.addEventListener('mouseup', endDrag);
+      window.addEventListener('mousemove', (e) => onMove(e.clientX));
+
+      // Touch
+      handle.addEventListener('touchstart', startDrag, { passive: false });
+      container.addEventListener('touchstart', (e) => {
+        if (e.touches.length !== 1) return;
+        startDrag(e);
+        setPosition(e.touches[0].clientX);
+      }, { passive: false });
+      window.addEventListener('touchend', endDrag);
+      window.addEventListener('touchcancel', endDrag);
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        onMove(e.touches[0].clientX);
+      }, { passive: true });
+    })();
+
+    // ========== Lightbox ==========
+    (function initLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const closeBtn = document.getElementById('lightboxClose');
+
+      function open(src) {
+        lightboxImg.src = src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+        lightboxImg.src = '';
+      }
+
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const src = item.getAttribute('data-src') || item.querySelector('img')?.src;
+          if (src) open(src);
+        });
+      });
+
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) close();
+      });
+    })();
+
+    // ========== Booking form ==========
+    (function initForm() {
+      const form = document.getElementById('bookingForm');
+      if (!form) return;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Reset
+        form.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+        form.querySelectorAll('.error-msg').forEach(el => el.classList.add('hidden'));
+
+        const name = form.name.value.trim();
+        const phone = form.phone.value.trim();
+        const car = form.car.value.trim();
+        const service = form.service.value;
+        const comment = form.comment.value.trim();
+
+        let valid = true;
+
+        if (!name || name.length < 2) {
+          form.name.classList.add('error');
+          form.name.nextElementSibling.classList.remove('hidden');
+          valid = false;
+        }
+
+        const digits = phone.replace(/\D/g, '');
+        if (digits.length < 10) {
+          form.phone.classList.add('error');
+          form.phone.nextElementSibling.classList.remove('hidden');
+          valid = false;
+        }
+
+        if (!valid) return;
+
+        if (!CONTACTS.whatsapp) {
+          alert('Сначала укажите номер WhatsApp в конфигурации CONTACTS в начале скрипта.');
+          return;
+        }
+
+        let msg = 'Здравствуйте! Хочу записаться на детейлинг.\n\n';
+        msg += 'Имя: ' + name + '\n';
+        msg += 'Телефон: ' + phone + '\n';
+        if (car) msg += 'Авто: ' + car + '\n';
+        if (service) msg += 'Услуга: ' + service + '\n';
+        if (comment) msg += 'Комментарий: ' + comment;
+
+        const url = 'https://wa.me/' + CONTACTS.whatsapp + '?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank', 'noopener');
+      });
+    })();
+
+    // ========== GSAP ==========
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .from('#heroBadge', { opacity: 0, y: 18, duration: 0.65 }, 0.15)
+      .from('#heroTitle', { opacity: 0, y: 36, duration: 0.85 }, 0.28)
+      .from('#heroDesc', { opacity: 0, y: 24, duration: 0.7 }, 0.48)
+      .from('#heroCta', { opacity: 0, y: 20, duration: 0.65 }, 0.62)
+      .from('#heroImg', { scale: 1.1, duration: 1.5, ease: 'power2.out' }, 0);
+
+    gsap.to('#heroImg', {
+      yPercent: 12,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#heroImg',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true
+      }
+    });
+
+    gsap.utils.toArray('.reveal').forEach((el) => {
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.75,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+
+    // Init contacts after DOM ready
+    applyContacts();
+  </script>
+</body>
+</html>
